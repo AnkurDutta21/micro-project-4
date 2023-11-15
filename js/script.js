@@ -4,7 +4,7 @@ const display = document.querySelector('.display')
 
 
 let defaultValue = '0'
-// let newValue = ''default value
+let newValue = ''
 
 
 display.innerHTML = defaultValue
@@ -16,38 +16,60 @@ buttons.forEach(btn => {
     btn.addEventListener('click', () => {
         const input = btn.value
         buttonFunc(input)
-        if(newValue.length !== 0){
+        if (newValue.length !== 0) {
             display.innerHTML = newValue
         }
-        else{
+        else {
             display.innerHTML = defaultValue
         }
-        console.log(input, 'clicked');
-    });
-});
+        console.log(input, 'clicked')
+    })
+})
 
 
 // button function 
 const buttonFunc = (input) => {
+    const operators = ['+', '-', '*', '/', '-']
     switch (input) {
         case '=':
-            const result = eval(newValue);
+            const result = eval(newValue)
             newValue = result
             // console.log(typeof(result))
-            break;
+            break
         case 'Reset':
-            newValue = defaultValue;
-            break;
+            newValue = defaultValue
+            break
         case 'Del':
-            if(newValue.length !== 0){
-                newValue = newValue.toString().slice(0, -1);
+            if (newValue.length !== 0) {
+                newValue = newValue.toString().slice(0, -1)
             }
-            else{
+            else {
                 newValue = ''
             }
-            break;
+            break
+            case '.':
+                if (newValue.includes('.')) {
+                    return
+                } else {
+                    newValue += input
+                }
+                break
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                const lastOperator = newValue.slice(-1)
+
+                if (operators.includes(lastOperator)) {
+                    return
+                } else {
+                    newValue += input
+                }
+                break
         default:
-            newValue += input;
-            break;
+                newValue += input
+            break
     }
 }
+
+
