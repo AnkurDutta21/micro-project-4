@@ -25,10 +25,6 @@ const buttonFunc= (input)=>{
         newValue = defaultValue
     } else if (input === 'Del') {
         newValue = newValue.slice(0, -1)
-
-        if (newValue === '') {
-            newValue = defaultValue
-        }
     } else {
         newValue += input
     }
